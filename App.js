@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Switch, Image, TextInput, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 
 import slider from '@react-native-community/slider';
@@ -10,9 +10,13 @@ const icon = require('./src/img/icon.png');
 const icon_user = require('./src/img/user.png');
 const icon_lock = require('./src/img/padlock.png');
 const icon_email = require('./src/img/email.png');
+const icon_cpf = require('./src/img/id-card.png');
+
 
 
 export default function App() {
+
+
   return (
 
     <SafeAreaView style={styles.container}>
@@ -48,12 +52,12 @@ export default function App() {
               <TextInput
                 style={styles.inputNome}
                 placeholder='DIGITE SEU NOME'
-                keyboardType='number-pad'
+                keyboardType='default'
               />
             </View>
 
             <View style={styles.boxEntradaDados}>
-              <Image source={icon_user} style={{ height: 35, width: 35 }} />
+              <Image source={icon_cpf} style={{ height: 35, width: 35 }} />
               <TextInput
                 style={styles.inputNome}
                 placeholder='DIGITE SEU CPF'
@@ -79,6 +83,15 @@ export default function App() {
               />
             </View>
 
+            <View style={styles.boxEntradaDados}>
+              <Image source={icon_lock} style={{ height: 35, width: 35 }} />
+              <TextInput
+                style={styles.inputNome}
+                placeholder='CONFIRME A SENHA'
+                secureTextEntry={true}
+              />
+            </View>
+
             <View style={styles.boxButton}>
               <TouchableOpacity
                 style={styles.button}
@@ -86,6 +99,7 @@ export default function App() {
                 <Text style={styles.txtButton}>Cadastrar</Text>
               </TouchableOpacity>
             </View>
+
 
             <View style={styles.login}>
               <Text style={styles.txtLogin}>Já possui conta? </Text>
@@ -150,7 +164,8 @@ const styles = StyleSheet.create({
   boxButton: {
     alignItems: 'center',
     marginTop: 20,
-    flex: 1
+    flex: 1,
+    marginTop: 25
   },
   button: {
     backgroundColor: '#112084',
@@ -207,5 +222,5 @@ const styles = StyleSheet.create({
     height: 500, // Altura do fundo
     backgroundColor: '#2E3E71', // Cor com transparência
     borderRadius: 120, // Torna o fundo uma elipse
-  }
+  },
 });
