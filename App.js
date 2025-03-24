@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, SafeAreaView, Switch, Image, TextInput, Touchab
 
 import slider from '@react-native-community/slider';
 import { Picker } from '@react-native-picker/picker'
+import { LinearGradient } from 'expo-linear-gradient'
+import { BlurView } from 'expo-blur';
 
 const icon = require('./src/img/icon.png');
 const icon_user = require('./src/img/user.png');
@@ -12,7 +14,9 @@ const icon_email = require('./src/img/email.png');
 
 export default function App() {
   return (
+
     <SafeAreaView style={styles.container}>
+
       <KeyboardAvoidingView // USADO PARA FAZER O LAYOUT SE AJUSTAR QUANDO ABRIR TECLADOS
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Ajusta o comportamento para iOS e Android
         style={{ flex: 1 }}
@@ -20,6 +24,12 @@ export default function App() {
         <ScrollView>
 
           <View style={styles.boxIcon}>
+            <View style={styles.colorBackground} />
+            <BlurView
+              intensity={50} // Intensidade do desfoque
+              tint="light" // Cor do desfoque
+              style={styles.blurBackground}
+            />
             <Image
               source={icon}
               style={styles.icon}
@@ -29,8 +39,18 @@ export default function App() {
           <View style={styles.boxTitle}>
             <Text style={styles.title}>Novo Usuário</Text>
           </View>
+          <View style={styles.horizontalLine} />
 
           <View style={styles.boxInput}>
+
+            <View style={styles.boxEntradaDados}>
+              <Image source={icon_user} style={{ height: 35, width: 35 }} />
+              <TextInput
+                style={styles.inputNome}
+                placeholder='DIGITE SEU NOME'
+                keyboardType='number-pad'
+              />
+            </View>
 
             <View style={styles.boxEntradaDados}>
               <Image source={icon_user} style={{ height: 35, width: 35 }} />
@@ -87,8 +107,8 @@ const styles = StyleSheet.create({
   },
   boxIcon: {
     alignItems: 'center',
-    marginTop: 69,
-    paddingBottom: 20
+    paddingBottom: 20,
+    overflow: 'hidden'
   },
   icon: {
     height: 300,
@@ -105,7 +125,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'Poppins',
     textAlign: 'center',
-    paddingLeft: 5
+    paddingLeft: 5,
+
   },
   boxInput: {
     flexDirection: 'column',
@@ -161,5 +182,30 @@ const styles = StyleSheet.create({
   },
   txtAcesseAqui: {
     borderBottomWidth: 1
+  },
+  horizontalLine: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+    height: 2,
+    backgroundColor: 'black',
+    width: '80%',
+    marginLeft: 35,
+  },
+  blurBackground: {
+    position: 'absolute', // Permite posicionar o blur fora da tela
+    top: -100, // Move a metade superior do blur para fora da tela
+    width: '100%', // Largura do blur
+    height: 500, // Altura do blur
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  colorBackground: {
+    position: 'absolute', // Posiciona o fundo atrás do BlurView
+    top: -300, // Move a metade superior para fora da tela
+    width: '100%', // Largura do fundo
+    height: 500, // Altura do fundo
+    backgroundColor: '#2E3E71', // Cor com transparência
+    borderRadius: 120, // Torna o fundo uma elipse
   }
 });
